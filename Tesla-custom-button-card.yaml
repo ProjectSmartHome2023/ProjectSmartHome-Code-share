@@ -1,0 +1,219 @@
+type: custom:button-card
+show_state: true
+tap_action:
+  action: none
+custom_fields:
+  tesla_pic:
+    card:
+      type: picture
+      image: /local/tesla-model-y-blue-top5.png
+  tesla_doors:
+    card:
+      type: custom:mushroom-chips-card
+      chips:
+        - type: template
+          tap_action:
+            action: none
+          hold_action:
+            action: none
+          double_tap_action:
+            action: none
+          icon: mdi:car-door-lock
+          icon_color: |-
+            {% if is_state('lock.lock', 'unlocked') %}
+              red
+            {% endif %}
+          content: " Car {{ states('lock.lock') }}"
+  left_front_tyre_pressure:
+    card:
+      type: custom:mushroom-template-card
+      primary: "{{ states('sensor.tire_pressure_front_left') | round(0) }} psi"
+      secondary: ""
+      icon: ""
+      entity: sensor.tire_pressure_front_left
+  right_front_tyre_pressure:
+    card:
+      type: custom:mushroom-template-card
+      primary: "{{ states('sensor.tire_pressure_front_right') | round(0) }} psi"
+      secondary: ""
+      icon: ""
+      entity: sensor.tire_pressure_front_right
+  left_rear_tyre_pressure:
+    card:
+      type: custom:mushroom-template-card
+      primary: "{{ states('sensor.tire_pressure_rear_left') | round(0) }} psi"
+      secondary: ""
+      icon: ""
+      entity: sensor.tire_pressure_rear_left
+  right_rear_tyre_pressure:
+    card:
+      type: custom:mushroom-template-card
+      primary: "{{ states('sensor.tire_pressure_rear_right') | round(0) }} psi"
+      secondary: ""
+      icon: ""
+      entity: sensor.tire_pressure_rear_left
+  cabin_temp:
+    card:
+      type: custom:mushroom-template-card
+      primary: "{{ states('sensor.inside_temperature') | round(1) }} °C"
+      secondary: ""
+      icon: ""
+      entity: sensor.inside_temperature
+  driver_door:
+    card:
+      type: custom:mushroom-chips-card
+      chips:
+        - type: entity
+          entity: binary_sensor.front_driver_door
+        - type: entity
+          entity: binary_sensor.rear_driver_window
+  passenger_door:
+    card:
+      type: custom:mushroom-chips-card
+      chips:
+        - type: entity
+          entity: binary_sensor.front_passenger_door
+        - type: entity
+          entity: binary_sensor.front_passenger_window
+  rear_passenger_door:
+    card:
+      type: custom:mushroom-chips-card
+      chips:
+        - type: entity
+          entity: binary_sensor.rear_passenger_door
+        - type: entity
+          entity: binary_sensor.rear_passenger_window
+  rear_driver_door:
+    card:
+      type: custom:mushroom-chips-card
+      chips:
+        - type: entity
+          entity: binary_sensor.rear_driver_door
+        - type: entity
+          entity: binary_sensor.rear_driver_window
+  frunk:
+    card:
+      type: custom:mushroom-chips-card
+      chips:
+        - type: template
+          tap_action:
+            action: none
+          hold_action:
+            action: none
+          double_tap_action:
+            action: none
+          icon: mdi:hat-fedora
+          icon_color: |-
+            {% if is_state('cover.frunk', 'open') %}
+              red
+            {% endif %}
+          content: " Frunk {{ states('cover.frunk') }}"
+  trunk:
+    card:
+      type: custom:mushroom-chips-card
+      chips:
+        - type: template
+          tap_action:
+            action: none
+          hold_action:
+            action: none
+          double_tap_action:
+            action: none
+          icon: mdi:shoe-cleat
+          icon_color: |-
+            {% if is_state('cover.trunk', 'open') %}
+              red
+            {% endif %}
+          content: " Boot {{ states('cover.trunk') }}"
+  outdoor_temp:
+    card:
+      type: custom:mushroom-template-card
+      primary: "{{ states('sensor.outside_temperature')  }} °C"
+      icon: ""
+      entity: sensor.outside_temperature
+styles:
+  card:
+    - align-self: start
+    - width: 490px
+    - height: 500px
+    - opacity: 1
+    - background-color: black
+    - border: none
+  custom_fields:
+    tesla_pic:
+      - position: absolute
+      - top: "-10px"
+      - left: "-250px"
+      - width: 895px
+    tesla_doors:
+      - position: absolute
+      - top: 10px
+      - left: 145px
+      - width: 120px
+    left_front_tyre_pressure:
+      - position: absolute
+      - top: 90px
+      - left: 30px
+      - width: 70px
+    right_front_tyre_pressure:
+      - position: absolute
+      - top: 90px
+      - left: 290px
+      - width: 70px
+    left_rear_tyre_pressure:
+      - position: absolute
+      - top: 380px
+      - left: 30px
+      - width: 70px
+    right_rear_tyre_pressure:
+      - position: absolute
+      - top: 380px
+      - left: 290px
+      - width: 70px
+    cabin_temp:
+      - position: absolute
+      - top: 200px
+      - left: 155px
+      - width: 80px
+    driver_door:
+      - position: absolute
+      - top: 170px
+      - left: 290px
+      - width: 110px
+    passenger_door:
+      - position: absolute
+      - top: 170px
+      - left: 20px
+      - width: 110px
+    rear_passenger_door:
+      - position: absolute
+      - top: 280px
+      - left: 20px
+      - width: 110px
+    rear_driver_door:
+      - position: absolute
+      - top: 280px
+      - left: 290px
+      - width: 110px
+    frunk:
+      - position: absolute
+      - top: 70px
+      - left: 155px
+      - width: 80px
+    trunk:
+      - position: absolute
+      - top: 400px
+      - left: 155px
+      - width: 80px
+    outdoor_temp:
+      - position: absolute
+      - top: 20px
+      - left: 315px
+      - width: 80px
+  name:
+    - justify-self: start
+    - align-self: start
+    - fontsize: 24px
+    - fontweight: 500
+    - color: white
+  state: min-height

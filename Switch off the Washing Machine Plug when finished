@@ -1,0 +1,73 @@
+alias: Utility Room - Switch off the Washing Machine Plug when finished
+description: ""
+mode: parallel
+triggers:
+  - type: power
+    device_id: 0fc4a0f2c01fd775cb4019a8d090d1a9
+    entity_id: sensor.washing_machine_plug_power
+    domain: sensor
+    below: 5
+    for:
+      hours: 0
+      minutes: 3
+      seconds: 0
+    trigger: device
+conditions:
+  - condition: device
+    type: is_on
+    device_id: 0fc4a0f2c01fd775cb4019a8d090d1a9
+    entity_id: switch.washing_machine_plug_2
+    domain: switch
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+actions:
+  - type: turn_off
+    device_id: 0fc4a0f2c01fd775cb4019a8d090d1a9
+    entity_id: switch.washing_machine_plug_2
+    domain: switch
+  - target:
+      entity_id: media_player.utility_room_speaker
+    data:
+      media_content_id: >-
+        media-source://tts/tts.home_assistant_cloud?message=The+Washing+machine+has+finished+its+cycle.&language=en-GB&voice=LibbyNeural
+      media_content_type: provider
+    metadata:
+      title: The Washing machine has finished its cycle.
+      thumbnail: https://brands.home-assistant.io/_/tts/logo.png
+      media_class: app
+      children_media_class: null
+      navigateIds:
+        - {}
+        - media_content_type: app
+          media_content_id: media-source://tts
+        - media_content_type: provider
+          media_content_id: >-
+            media-source://tts/tts.home_assistant_cloud?message=The+Washing+machine+has+finished+its+cycle.&language=en-GB&voice=LibbyNeural
+    action: media_player.play_media
+  - data:
+      message: Washing Machine Cycle has finished.
+    action: notify.mobile_app_tamzin_s_iphone
+  - data:
+      message: Washing Machine Cycle has finished.
+    action: notify.mobile_app_paul_s_motorola_razr_50_ultra
+  - target:
+      entity_id: media_player.living_room_display
+    data:
+      media_content_id: >-
+        media-source://tts/cloud?message=The+Washing+machine+has+finished+its+cycle.&language=en-GB&voice=LibbyNeural
+      media_content_type: provider
+    metadata:
+      title: The Washing machine has finished its cycle.
+      thumbnail: https://brands.home-assistant.io/_/cloud/logo.png
+      media_class: app
+      children_media_class: null
+      navigateIds:
+        - {}
+        - media_content_type: app
+          media_content_id: media-source://tts
+        - media_content_type: provider
+          media_content_id: >-
+            media-source://tts/cloud?message=The+Washing+machine+has+finished+its+cycle.&language=en-GB&voice=LibbyNeural
+    action: media_player.play_media

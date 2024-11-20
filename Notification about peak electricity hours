@@ -1,0 +1,130 @@
+alias: Utility Room - Notification about peak electricity hours
+description: ""
+triggers:
+  - type: turned_on
+    device_id: 520a3e2d6460220bb977d1c15ca8dde6
+    entity_id: 35265d0541dbe1a278dd200c77bb7c64
+    domain: switch
+    trigger: device
+  - type: turned_on
+    device_id: 0fc4a0f2c01fd775cb4019a8d090d1a9
+    entity_id: 5e7bb5963b3e4e1db0a1ef5ba5d85c13
+    domain: switch
+    trigger: device
+  - type: turned_on
+    device_id: d3d146d3d38897e4e0963b373dd9b7e8
+    entity_id: 9acf7029343c84ed64bc19eed526cdf7
+    domain: switch
+    trigger: device
+conditions:
+  - condition: time
+    after: "15:00:00"
+    before: "19:00:00"
+actions:
+  - if:
+      - condition: device
+        device_id: 45e9d3b0d151d34396e745bb8edf982d
+        domain: media_player
+        entity_id: cca679b8fb41e5678ebd493039b5bf93
+        type: is_playing
+    then:
+      - action: media_player.media_pause
+        metadata: {}
+        data: {}
+        target:
+          device_id: 45e9d3b0d151d34396e745bb8edf982d
+  - action: media_player.play_media
+    target:
+      entity_id: media_player.utility_room_speaker
+    data:
+      media_content_id: >-
+        media-source://tts/tts.home_assistant_cloud?message=Hello%2C+between+4pm+and+7pm+is+peak+electricity+charges.++Please+consider+running+the+appliance+outside+of+these+hours.&language=en-IE&voice=EmilyNeural
+      media_content_type: provider
+    metadata:
+      title: >-
+        Hello, between 4pm and 7pm is peak electricity charges.  Please consider
+        running the appliance outside of these hours.
+      thumbnail: https://brands.home-assistant.io/_/tts/logo.png
+      media_class: app
+      children_media_class: null
+      navigateIds:
+        - {}
+        - media_content_type: app
+          media_content_id: media-source://tts
+        - media_content_type: provider
+          media_content_id: >-
+            media-source://tts/tts.home_assistant_cloud?message=Hello%2C+between+4pm+and+7pm+is+peak+electricity+charges.++Please+consider+running+the+appliance+outside+of+these+hours.&language=en-IE&voice=EmilyNeural
+  - data:
+      message: >-
+        Hello, between 4pm and 7pm is peak electricity charges.  Please consider
+        running the appliance between 1pm and 4pm.or outside of the peak hours.
+      data:
+        type: tts
+    action: notify.alexa_media_paul_s_echo_dot_2
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 20
+      milliseconds: 0
+  - if:
+      - condition: device
+        device_id: 45e9d3b0d151d34396e745bb8edf982d
+        domain: media_player
+        entity_id: cca679b8fb41e5678ebd493039b5bf93
+        type: is_paused
+    then:
+      - action: media_player.media_play
+        target:
+          device_id:
+            - 45e9d3b0d151d34396e745bb8edf982d
+        data: {}
+  - wait_for_trigger:
+      - trigger: time
+        at: "19:00:00"
+  - if:
+      - condition: device
+        device_id: 45e9d3b0d151d34396e745bb8edf982d
+        domain: media_player
+        entity_id: cca679b8fb41e5678ebd493039b5bf93
+        type: is_playing
+    then:
+      - action: media_player.media_pause
+        metadata: {}
+        data: {}
+        target:
+          device_id: 45e9d3b0d151d34396e745bb8edf982d
+  - action: media_player.play_media
+    target:
+      entity_id: media_player.communal_speakers
+    data:
+      media_content_id: >-
+        media-source://tts/tts.home_assistant_cloud?message=Its+now+7pm.++We+are+now+outside+of+peak+rate+electricity+rates.+Feel+free+to+switch+on+the+appliance+now.&language=en-GB&voice=LibbyNeural
+      media_content_type: provider
+    metadata:
+      title: >-
+        Its now 7pm.  We are now outside of peak rate electricity rates. Feel
+        free to switch on the appliance now.
+      thumbnail: https://brands.home-assistant.io/_/tts/logo.png
+      media_class: app
+      children_media_class: null
+      navigateIds:
+        - {}
+        - media_content_type: app
+          media_content_id: media-source://tts
+        - media_content_type: provider
+          media_content_id: >-
+            media-source://tts/tts.home_assistant_cloud?message=Its+now+7pm.++We+are+now+outside+of+peak+rate+electricity+rates.+Feel+free+to+switch+on+the+appliance+now.&language=en-GB&voice=LibbyNeural
+  - if:
+      - condition: device
+        device_id: 45e9d3b0d151d34396e745bb8edf982d
+        domain: media_player
+        entity_id: cca679b8fb41e5678ebd493039b5bf93
+        type: is_paused
+    then:
+      - action: media_player.media_play
+        target:
+          device_id:
+            - 45e9d3b0d151d34396e745bb8edf982d
+        data: {}
+mode: parallel
+max: 10

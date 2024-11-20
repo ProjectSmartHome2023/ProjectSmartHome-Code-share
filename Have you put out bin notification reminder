@@ -1,0 +1,241 @@
+alias: Bin Day - Actionable Notification
+description: ""
+triggers:
+  - event: start
+    offset: "-0:48:0"
+    entity_id: calendar.home
+    trigger: calendar
+conditions:
+  - condition: state
+    entity_id: input_boolean.kitchen_bin
+    state: "on"
+actions:
+  - choose:
+      - conditions:
+          - condition: state
+            entity_id: calendar.home
+            attribute: message
+            state: Blue Bin
+        sequence:
+          - repeat:
+              sequence:
+                - data:
+                    message: Have you put the BLUE bin out?
+                    data:
+                      actions:
+                        - action: YES_BIN_OUT
+                          title: "Yes"
+                          destructive: true
+                  action: notify.mobile_app_tamzin_s_iphone
+                - data:
+                    message: Have you put the BLUE Bin Out?
+                    data:
+                      actions:
+                        - action: YES_BIN_OUT
+                          title: "Yes"
+                          destructive: true
+                  action: notify.mobile_app_paul_s_motorola_razr_50_ultra
+                - action: media_player.play_media
+                  target:
+                    entity_id: media_player.communal_speakers
+                  data:
+                    media_content_id: >-
+                      media-source://tts/google_translate?message=Good+Morning%2C+its+Blue+Bin+day%21+Have+you+put+the+blue+bin+out%3F&language=en
+                    media_content_type: provider
+                  metadata:
+                    title: >-
+                      Good Morning, its Blue Bin day! Have you put the blue bin
+                      out?
+                    thumbnail: >-
+                      https://brands.home-assistant.io/_/google_translate/logo.png
+                    media_class: app
+                    children_media_class: null
+                    navigateIds:
+                      - {}
+                      - media_content_type: app
+                        media_content_id: media-source://tts
+                      - media_content_type: provider
+                        media_content_id: >-
+                          media-source://tts/google_translate?message=Good+Morning%2C+its+Blue+Bin+day%21+Have+you+put+the+blue+bin+out%3F&language=en
+                - delay:
+                    hours: 0
+                    minutes: 0
+                    seconds: 10
+                    milliseconds: 0
+                - action: media_player.play_media
+                  target:
+                    entity_id: media_player.nesthubmaxb389_4
+                  data:
+                    media_content_id: media-source://media_source/local/1024x385_bin_Blue.jpeg
+                    media_content_type: image/jpeg
+                  metadata:
+                    title: 1024x385_bin_Blue.jpeg
+                    thumbnail: null
+                    media_class: image
+                    children_media_class: null
+                    navigateIds:
+                      - {}
+                      - media_content_type: app
+                        media_content_id: media-source://media_source
+                - delay:
+                    hours: 0
+                    minutes: 30
+                    seconds: 0
+                    milliseconds: 0
+              while:
+                - condition: state
+                  entity_id: input_boolean.kitchen_bin
+                  state: "on"
+      - conditions:
+          - condition: state
+            entity_id: calendar.home
+            attribute: message
+            state: Black Bin
+        sequence:
+          - repeat:
+              sequence:
+                - data:
+                    message: Have you put the BLACK bin out?
+                    data:
+                      actions:
+                        - action: YES_BIN_OUT
+                          title: "Yes"
+                          destructive: true
+                  action: notify.mobile_app_tamzin_s_iphone
+                - data:
+                    message: Have you put the BLACK Bin Out?
+                    data:
+                      actions:
+                        - action: YES_BIN_OUT
+                          title: "Yes"
+                          destructive: true
+                  action: notify.mobile_app_paul_s_motorola_razr_50_ultra
+                - action: media_player.play_media
+                  target:
+                    entity_id: media_player.communal_speakers
+                  data:
+                    media_content_id: >-
+                      media-source://tts/google_translate?message=Good+Morning%2C+its+Black+bin+day%21+Have+you+put+the+black+bin+out%3F&language=en
+                    media_content_type: provider
+                  metadata:
+                    title: >-
+                      Good Morning, its Black bin day! Have you put the black
+                      bin out?
+                    thumbnail: >-
+                      https://brands.home-assistant.io/_/google_translate/logo.png
+                    media_class: app
+                    children_media_class: null
+                    navigateIds:
+                      - {}
+                      - media_content_type: app
+                        media_content_id: media-source://tts
+                      - media_content_type: provider
+                        media_content_id: >-
+                          media-source://tts/google_translate?message=Good+Morning%2C+its+Black+bin+day%21+Have+you+put+the+black+bin+out%3F&language=en
+                - delay:
+                    hours: 0
+                    minutes: 0
+                    seconds: 10
+                    milliseconds: 0
+                - action: media_player.play_media
+                  target:
+                    entity_id: media_player.nesthubmaxb389_4
+                  data:
+                    media_content_id: >-
+                      media-source://media_source/local/Veolia UK _ 360 L
+                      General Waste Bin.png
+                    media_content_type: image/png
+                  metadata:
+                    title: Veolia UK _ 360 L General Waste Bin.png
+                    thumbnail: null
+                    media_class: image
+                    children_media_class: null
+                    navigateIds:
+                      - {}
+                      - media_content_type: app
+                        media_content_id: media-source://media_source
+                - delay:
+                    hours: 0
+                    minutes: 30
+                    seconds: 0
+                    milliseconds: 0
+              while:
+                - condition: state
+                  entity_id: input_boolean.kitchen_bin
+                  state: "on"
+      - conditions:
+          - condition: state
+            entity_id: calendar.home
+            attribute: message
+            state: Green Bin
+        sequence:
+          - repeat:
+              sequence:
+                - data:
+                    message: Have you put the GREEN bin out?
+                    data:
+                      actions:
+                        - action: YES_BIN_OUT
+                          title: "Yes"
+                          destructive: true
+                  action: notify.mobile_app_tamzin_s_iphone
+                - data:
+                    message: Have you put the GREEN Bin Out?
+                    data:
+                      actions:
+                        - action: YES_BIN_OUT
+                          title: "Yes"
+                          destructive: true
+                  action: notify.mobile_app_paul_s_motorola_razr_50_ultra
+                - action: media_player.play_media
+                  target:
+                    entity_id: media_player.communal_speakers
+                  data:
+                    media_content_id: >-
+                      media-source://tts/google_translate?message=Good+Morning%2C+its+green+bin+day%21+Have+you+put+the+green+bin+out%3F&language=en
+                    media_content_type: provider
+                  metadata:
+                    title: >-
+                      Good Morning, its green bin day! Have you put the green
+                      bin out?
+                    thumbnail: >-
+                      https://brands.home-assistant.io/_/google_translate/logo.png
+                    media_class: app
+                    children_media_class: null
+                    navigateIds:
+                      - {}
+                      - media_content_type: app
+                        media_content_id: media-source://tts
+                      - media_content_type: provider
+                        media_content_id: >-
+                          media-source://tts/google_translate?message=Good+Morning%2C+its+green+bin+day%21+Have+you+put+the+green+bin+out%3F&language=en
+                - delay:
+                    hours: 0
+                    minutes: 0
+                    seconds: 10
+                    milliseconds: 0
+                - action: media_player.play_media
+                  target:
+                    entity_id: media_player.nesthubmaxb389_4
+                  data:
+                    media_content_id: media-source://media_source/local/green_bin.jpg
+                    media_content_type: image/jpeg
+                  metadata:
+                    title: green_bin.jpg
+                    thumbnail: null
+                    media_class: image
+                    children_media_class: null
+                    navigateIds:
+                      - {}
+                      - media_content_type: app
+                        media_content_id: media-source://media_source
+                - delay:
+                    hours: 0
+                    minutes: 30
+                    seconds: 0
+                    milliseconds: 0
+              while:
+                - condition: state
+                  entity_id: input_boolean.kitchen_bin
+                  state: "on"
+mode: single

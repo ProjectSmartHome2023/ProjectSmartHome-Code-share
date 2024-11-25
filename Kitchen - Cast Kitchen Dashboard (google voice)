@@ -1,0 +1,49 @@
+alias: Kitchen - Cast Kitchen Dashboard (google voice)
+description: ""
+triggers:
+  - trigger: state
+    entity_id:
+      - input_boolean.cast_kitchen_dashboard
+    to: "on"
+conditions: []
+actions:
+  - action: media_player.play_media
+    target:
+      entity_id: media_player.nesthubmaxb389_4
+    data:
+      media_content_id: room-displays/kitchen
+      media_content_type: lovelace
+    metadata:
+      title: Kitchen
+      thumbnail: https://brands.home-assistant.io/_/lovelace/logo.png
+      media_class: app
+      children_media_class: null
+      navigateIds:
+        - {}
+        - media_content_type: lovelace
+          media_content_id: ""
+        - media_content_type: lovelace
+          media_content_id: room-displays
+  - action: input_boolean.turn_off
+    target:
+      entity_id: input_boolean.cast_kitchen_dashboard
+    data: {}
+  - delay:
+      hours: 0
+      minutes: 2
+      seconds: 0
+      milliseconds: 0
+  - if:
+      - condition: template
+        value_template: >-
+          {{ state_attr('media_player.nesthubmaxb389_4', 'app_name') == 'Home
+          Assistant Lovelace' }}
+    then:
+      - action: media_player.turn_off
+        metadata: {}
+        data: {}
+        target:
+          device_id:
+            - 45e9d3b0d151d34396e745bb8edf982d
+mode: parallel
+max: 10

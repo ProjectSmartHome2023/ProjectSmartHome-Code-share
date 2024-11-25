@@ -1,0 +1,78 @@
+alias: Kitchen - Cast Kitchen Dashboard (motion)
+description: ""
+triggers:
+  - type: occupied
+    device_id: 764945851957ab2b8bfc9af490bcc701
+    entity_id: be9824d782eddb7c9bc793dfb5261959
+    domain: binary_sensor
+    trigger: device
+  - type: occupied
+    device_id: 764945851957ab2b8bfc9af490bcc701
+    entity_id: 85ff4014b9a95df8b00c399d4abfb043
+    domain: binary_sensor
+    trigger: device
+  - type: occupied
+    device_id: 764945851957ab2b8bfc9af490bcc701
+    entity_id: d4a153e09c90c28f6d2bc883dc486914
+    domain: binary_sensor
+    trigger: device
+conditions:
+  - condition: or
+    conditions:
+      - condition: time
+        after: "07:00:00"
+        before: "23:00:00"
+  - condition: template
+    value_template: >-
+      {{ state_attr('media_player.nesthubmaxb389_4', 'app_name') != 'Home
+      Assistant Lovelace' }}
+  - condition: not
+    conditions:
+      - condition: device
+        device_id: 45e9d3b0d151d34396e745bb8edf982d
+        domain: media_player
+        entity_id: cca679b8fb41e5678ebd493039b5bf93
+        type: is_playing
+actions:
+  - action: media_player.volume_set
+    metadata: {}
+    data:
+      volume_level: 0
+    target:
+      device_id: 45e9d3b0d151d34396e745bb8edf982d
+  - action: media_player.play_media
+    target:
+      entity_id: media_player.nesthubmaxb389_4
+    data:
+      media_content_id: room-displays/kitchen
+      media_content_type: lovelace
+    metadata:
+      title: Kitchen
+      thumbnail: https://brands.home-assistant.io/_/lovelace/logo.png
+      media_class: app
+      children_media_class: null
+      navigateIds:
+        - {}
+        - media_content_type: lovelace
+          media_content_id: ""
+        - media_content_type: lovelace
+          media_content_id: room-displays
+  - delay:
+      hours: 0
+      minutes: 2
+      seconds: 0
+      milliseconds: 0
+  - if:
+      - condition: template
+        value_template: >-
+          {{ state_attr('media_player.nesthubmaxb389_4', 'app_name') == 'Home
+          Assistant Lovelace' }}
+    then:
+      - action: media_player.turn_off
+        metadata: {}
+        data: {}
+        target:
+          device_id:
+            - 45e9d3b0d151d34396e745bb8edf982d
+mode: parallel
+max: 10

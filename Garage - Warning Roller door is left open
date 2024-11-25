@@ -1,0 +1,82 @@
+alias: Garage - Warning Roller door is left open
+description: ""
+triggers:
+  - type: opened
+    device_id: c7907758f5ae330d72dc2e7b07f34ef9
+    entity_id: binary_sensor.garage_roller_door_sensor_contact
+    domain: binary_sensor
+    for:
+      hours: 0
+      minutes: 10
+      seconds: 0
+    trigger: device
+conditions: []
+actions:
+  - repeat:
+      sequence:
+        - data:
+            message: >-
+              Hello. this is the garage roller door.  I just want to let you
+              know that I am open to the world.
+            data:
+              type: tts
+          action: notify.alexa_media_paul_s_echo_dot_2
+        - data:
+            data:
+              type: tts
+            message: >-
+              Hello. this is the garage roller door.  I just want to let you
+              know that I am open to the world.
+          action: notify.alexa_media_paul_s_echo_2
+        - action: notify.mobile_app_paul_s_motorola_razr_50_ultra
+          data:
+            message: The garage roller door is open.
+        - data:
+            message: The garage roller door is open.
+          action: notify.mobile_app_tamzin_s_iphone
+        - action: media_player.play_media
+          target:
+            entity_id: media_player.living_room_display
+          data:
+            media_content_id: room-displays/garage
+            media_content_type: lovelace
+          metadata:
+            title: Garage
+            thumbnail: https://brands.home-assistant.io/_/lovelace/logo.png
+            media_class: app
+            children_media_class: null
+            navigateIds:
+              - {}
+              - media_content_type: lovelace
+                media_content_id: ""
+              - media_content_type: lovelace
+                media_content_id: room-displays
+        - action: media_player.play_media
+          target:
+            entity_id: media_player.nesthubmaxb389_4
+          data:
+            media_content_id: room-displays/garage
+            media_content_type: lovelace
+          metadata:
+            title: Garage
+            thumbnail: https://brands.home-assistant.io/_/lovelace/logo.png
+            media_class: app
+            children_media_class: null
+            navigateIds:
+              - {}
+              - media_content_type: lovelace
+                media_content_id: ""
+              - media_content_type: lovelace
+                media_content_id: room-displays
+        - delay:
+            hours: 0
+            minutes: 10
+            seconds: 0
+            milliseconds: 0
+      while:
+        - type: is_open
+          condition: device
+          device_id: c7907758f5ae330d72dc2e7b07f34ef9
+          entity_id: 417defc753fb7f2034262670a468966b
+          domain: binary_sensor
+mode: single

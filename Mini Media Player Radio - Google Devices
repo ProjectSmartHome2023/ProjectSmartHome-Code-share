@@ -1,0 +1,22 @@
+type: custom:mini-media-player
+entity: media_player.reception_speaker
+name: Reception Speaker
+shortcuts:
+  columns: 3
+  buttons:
+    - type: cast
+      name: Radio 2
+      id: " { \"app_name\": \"bbcsounds\", \"media_id\": \"bbc_radio_two\", \"is_live\": true }"
+      icon: mdi:radio
+    - type: cast
+      name: Virgin
+      id: media-source://radio_browser/7d196930-5f3d-45e2-b11a-d261c4515161
+      icon: mdi:radio
+    - type: cast
+      name: Heart
+      id: media-source://radio_browser/96231406-0601-11e8-ae97-52543be04c81
+      icon: mdi:radio
+artwork: material
+toggle_power: false
+group: false
+source: icon

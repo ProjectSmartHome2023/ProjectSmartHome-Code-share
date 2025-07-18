@@ -1,0 +1,33 @@
+type: custom:mini-media-player
+entity: media_player.kitchen_dot
+name: Kitchen Amazon Dot
+shortcuts:
+  columns: 3
+  buttons:
+    - type: custom
+      name: Radio 2
+      id: play BBC Radio 2
+      icon: mdi:radio
+    - type: custom
+      name: Virgin
+      id: play Virgin Radio
+      icon: mdi:radio
+    - type: custom
+      name: Heart
+      id: play Heart Berkshire
+      icon: mdi:radio
+artwork: material
+source: icon
+group: false
+volume_stateless: false
+toggle_power: true
+hide:
+  volume: false
+  power: true
+  source: true
+  name: false
+  info: true
+  controls: false
+  progress: true
+  icon: true
+  state_label: true

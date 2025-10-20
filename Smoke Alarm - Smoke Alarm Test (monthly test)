@@ -1,0 +1,117 @@
+alias: Smoke Alarm - Smoke Alarm Test (monthly test)
+description: ""
+triggers:
+  - trigger: calendar
+    entity_id: calendar.home
+    event: start
+    offset: "-0:1:0"
+conditions:
+  - condition: state
+    entity_id: calendar.home
+    attribute: message
+    state: Smoke Alarm Test
+actions:
+  - action: media_player.play_media
+    target:
+      entity_id: media_player.emily_s_bedroom_display
+    data:
+      media:
+        media_content_id: >-
+          media-source://tts/tts.home_assistant_cloud?message=Be+aware.+The+Smoke+Alarm+Test+is+about+to+happen.++It+will+be+loud.++This+is+only+a+test.&language=en-GB&voice=AbbiNeural
+        media_content_type: audio/mp3
+        metadata:
+          title: >-
+            Be aware. The Smoke Alarm Test is about to happen.  It will be
+            loud.  This is only a test.
+          thumbnail: https://brands.home-assistant.io/_/cloud/logo.png
+          media_class: app
+          children_media_class: null
+          navigateIds:
+            - {}
+            - media_content_type: app
+              media_content_id: media-source://tts
+            - media_content_type: audio/mp3
+              media_content_id: >-
+                media-source://tts/tts.home_assistant_cloud?message=Be+aware.+The+Smoke+Alarm+Test+is+about+to+happen.++It+will+be+loud.++This+is+only+a+test.&language=en-GB&voice=AbbiNeural
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 10
+      milliseconds: 0
+  - device_id: 0ce4e7d73c9724151eef74c7fd812b93
+    domain: button
+    entity_id: 69b196670f3194ae58aeadadea4c967a
+    type: press
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 10
+      milliseconds: 0
+  - action: media_player.play_media
+    target:
+      entity_id: media_player.reception_speaker
+    data:
+      media:
+        media_content_id: >-
+          media-source://tts/tts.home_assistant_cloud?message=Be+aware.+The+Smoke+Alarm+Test+is+about+to+happen.++It+will+be+loud.++This+is+only+a+test.&language=en-GB&voice=AbbiNeural
+        media_content_type: audio/mp3
+        metadata:
+          title: >-
+            Be aware. The Smoke Alarm Test is about to happen.  It will be
+            loud.  This is only a test.
+          thumbnail: https://brands.home-assistant.io/_/cloud/logo.png
+          media_class: app
+          children_media_class: null
+          navigateIds:
+            - {}
+            - media_content_type: app
+              media_content_id: media-source://tts
+            - media_content_type: audio/mp3
+              media_content_id: >-
+                media-source://tts/tts.home_assistant_cloud?message=Be+aware.+The+Smoke+Alarm+Test+is+about+to+happen.++It+will+be+loud.++This+is+only+a+test.&language=en-GB&voice=AbbiNeural
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 10
+      milliseconds: 0
+  - device_id: c0cda0c4e222875f046f0701d9a06e1a
+    domain: button
+    entity_id: 5bcbbb5870679c7a56984058c0a4f95f
+    type: press
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 10
+      milliseconds: 0
+  - action: media_player.play_media
+    target:
+      entity_id: media_player.jack_s_bedroom_display
+    data:
+      media:
+        media_content_id: >-
+          media-source://tts/tts.home_assistant_cloud?message=Be+aware.+The+Smoke+Alarm+Test+is+about+to+happen.++It+will+be+loud.++This+is+only+a+test.&language=en-GB&voice=AbbiNeural
+        media_content_type: audio/mp3
+        metadata:
+          title: >-
+            Be aware. The Smoke Alarm Test is about to happen.  It will be
+            loud.  This is only a test.
+          thumbnail: https://brands.home-assistant.io/_/cloud/logo.png
+          media_class: app
+          children_media_class: null
+          navigateIds:
+            - {}
+            - media_content_type: app
+              media_content_id: media-source://tts
+            - media_content_type: audio/mp3
+              media_content_id: >-
+                media-source://tts/tts.home_assistant_cloud?message=Be+aware.+The+Smoke+Alarm+Test+is+about+to+happen.++It+will+be+loud.++This+is+only+a+test.&language=en-GB&voice=AbbiNeural
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 10
+      milliseconds: 0
+  - device_id: c42c04a48d1e72ae4d4e681dc12cde93
+    domain: button
+    entity_id: 01c163af63b8433fb2a0a4dac465e058
+    type: press
+mode: single
